@@ -10,11 +10,11 @@ The ultimate goal is to identify which parameters are the most likely to conduct
 ### Requirements
 This project requires the following python libraries
 
-pyspark
-pandas
-Matplotlib
-Seaborn
-jupyter notebook
+- pyspark
+- pandas
+- Matplotlib
+- Seaborn
+- jupyter notebook
 
 ### Files Description
 Sprakify .ipynb Main file of the project, it demonstrates the process of using pyspark to explore the data and build the model.
