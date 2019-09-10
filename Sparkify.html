@@ -13135,14 +13135,39 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Sparkify-Project-Workspace">Sparkify Project Workspace<a class="anchor-link" href="#Sparkify-Project-Workspace">&#182;</a></h1><p>This workspace contains a tiny subset (128MB) of the full dataset available (12GB).</p>
+<h1 id="Sparkify-Project-Workspace">Sparkify Project Workspace<a class="anchor-link" href="#Sparkify-Project-Workspace">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project-summary">Project summary<a class="anchor-link" href="#Project-summary">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this project we are going to analyse and to predict the users churn for an online music streaming service named “Sparkify” .
+User churn is one of the major risk that companies are facing nowadays in the industry with a tendency to have more “volatile” users.</p>
+<p>Therefore it is crucial to understand the root cause for churn in order to remediate it as fast as possible.
+We are given the equivalent of 2 months of logs history for users of the service (128 Mb). This is in fact a tiny portion of a much larger dataset (12 Gb in total) .</p>
+<p>The idea is to create a machine learning model using Apache Spark ml on this tiny dataset with the ultimate goal to generalize the model onto the main “big” dataset</p>
+<p>In this notebook we will go thru the following steps</p>
+<ul>
+<li>Data exploration &amp; analysis</li>
+<li>Features engineering</li>
+<li>Machine Learning modelling and prediction</li>
+<li>Conclusions &amp; possible improvements</li>
+</ul>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># import libraries</span>
@@ -13179,7 +13204,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span> \
@@ -13195,7 +13220,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">sparkContext</span><span class="o">.</span><span class="n">getConf</span><span class="p">()</span><span class="o">.</span><span class="n">getAll</span><span class="p">()</span>
@@ -13211,22 +13236,22 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[(&#39;spark.driver.port&#39;, &#39;37981&#39;),
- (&#39;spark.app.id&#39;, &#39;local-1568105544033&#39;),
+<pre>[(&#39;spark.driver.port&#39;, &#39;39773&#39;),
+ (&#39;spark.driver.host&#39;, &#39;312351e7066e&#39;),
  (&#39;spark.rdd.compress&#39;, &#39;True&#39;),
  (&#39;spark.serializer.objectStreamReset&#39;, &#39;100&#39;),
+ (&#39;spark.app.id&#39;, &#39;local-1568142675896&#39;),
  (&#39;spark.master&#39;, &#39;local[*]&#39;),
  (&#39;spark.executor.id&#39;, &#39;driver&#39;),
  (&#39;spark.submit.deployMode&#39;, &#39;client&#39;),
  (&#39;spark.ui.showConsoleProgress&#39;, &#39;true&#39;),
- (&#39;spark.app.name&#39;, &#39;Sparkify churn&#39;),
- (&#39;spark.driver.host&#39;, &#39;0f8271ba781b&#39;)]</pre>
+ (&#39;spark.app.name&#39;, &#39;Sparkify churn&#39;)]</pre>
 </div>
 
 </div>
@@ -13594,7 +13619,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#here is the list of the possible actions of the users in the app</span>
@@ -13658,7 +13683,7 @@ to flag churn</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#let&#39;s take a look at a few examples of users who cancelled their subscription</span>
@@ -13709,7 +13734,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># first, add a new colum called time to see clearly the timestamp</span>
@@ -13724,7 +13749,7 @@ only showing top 5 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#next, let&#39;s take a look at the userId 100001</span>
@@ -13781,7 +13806,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#creation of a churn column which will contain 1 if the user cancelled, 0 otherwise</span>
@@ -13799,7 +13824,7 @@ only showing top 20 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#let&#39;s reuse userId=100001 to confirm that the column Churn is indeed == 1 when the page event is &#39;Cancellation confirmation&#39;</span>
@@ -13853,7 +13878,7 @@ only showing top 10 rows
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#let&#39;s print again the dataframe schema to highlight the changes we did</span>
@@ -13949,7 +13974,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of distinct users in sparkify : </span><span class="si">{}</span><span class="s1">&#39;</span>\
@@ -13981,7 +14006,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of artists present in sparkify : </span><span class="si">{}</span><span class="s1">&#39;</span>\
@@ -14013,7 +14038,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#total amount of users cancellation</span>
@@ -14046,7 +14071,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;percentage of churned users : </span><span class="si">{}</span><span class="s1">%&#39;</span>\
@@ -14087,7 +14112,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_gender</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;userId&#39;</span><span class="p">,</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span><span class="s1">&#39;gender&#39;</span><span class="p">])</span><span class="o">.</span>\
@@ -14101,7 +14126,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_gender</span>
@@ -14117,7 +14142,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -14183,7 +14208,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pd_gender</span><span class="p">)</span>
@@ -14199,13 +14224,13 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[27]:</div>
+    <div class="prompt output_prompt">Out[29]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f05815f7a58&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fa95c27df98&gt;</pre>
 </div>
 
 </div>
@@ -14246,7 +14271,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_item</span> <span class="o">=</span> <span class="n">df_valid</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="s1">&#39;userId&#39;</span><span class="p">,</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span><span class="s1">&#39;level&#39;</span><span class="p">])</span><span class="o">.</span>\
@@ -14260,7 +14285,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd_item</span>
@@ -14276,7 +14301,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[29]:</div>
+    <div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -14342,7 +14367,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Churn&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;level&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pd_item</span><span class="p">)</span>
@@ -14358,13 +14383,13 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[32]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f05814de7b8&gt;</pre>
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fa95c165b00&gt;</pre>
 </div>
 
 </div>
@@ -14405,7 +14430,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#let&#39;s create 2 pandas datasets ; one for churned users, one for active users</span>
@@ -14420,7 +14445,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">active_users</span><span class="p">[</span><span class="s1">&#39;Churned&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;No&#39;</span>
@@ -14439,7 +14464,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[32]:</div>
+    <div class="prompt output_prompt">Out[34]:</div>
 
 
 
@@ -14583,198 +14608,13 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">churned_users</span><span class="p">[</span><span class="s1">&#39;percent(userId)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">churned_users</span><span class="p">[</span><span class="s1">&#39;count(userId)&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">churned_users</span><span class="p">[</span><span class="s1">&#39;count(userId)&#39;</span><span class="p">]),</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">churned_users</span><span class="p">[</span><span class="s1">&#39;Churned&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Yes&#39;</span>
 <span class="n">churned_users</span> <span class="o">=</span> <span class="n">churned_users</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;count(userId)&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">churned_users</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[33]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>page</th>
-      <th>percent(userId)</th>
-      <th>Churned</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Cancel</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Submit Downgrade</td>
-      <td>0.0</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Thumbs Down</td>
-      <td>1.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Home</td>
-      <td>3.7</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Downgrade</td>
-      <td>0.8</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Roll Advert</td>
-      <td>2.2</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Logout</td>
-      <td>1.2</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Save Settings</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Cancellation Confirmation</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>About</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Settings</td>
-      <td>0.6</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Add to Playlist</td>
-      <td>2.3</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Add Friend</td>
-      <td>1.4</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>NextSong</td>
-      <td>81.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Thumbs Up</td>
-      <td>4.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Help</td>
-      <td>0.5</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Upgrade</td>
-      <td>0.2</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Error</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Submit Upgrade</td>
-      <td>0.1</td>
-      <td>Yes</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">concat_users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">churned_users</span><span class="p">,</span><span class="n">active_users</span><span class="p">],</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">concat_users</span>
 </pre></div>
 
     </div>
@@ -14930,6 +14770,191 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
       <td>0.1</td>
       <td>Yes</td>
     </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">concat_users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">churned_users</span><span class="p">,</span><span class="n">active_users</span><span class="p">],</span><span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">concat_users</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>page</th>
+      <th>percent(userId)</th>
+      <th>Churned</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Cancel</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Submit Downgrade</td>
+      <td>0.0</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Thumbs Down</td>
+      <td>1.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Home</td>
+      <td>3.7</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Downgrade</td>
+      <td>0.8</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Roll Advert</td>
+      <td>2.2</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Logout</td>
+      <td>1.2</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Save Settings</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Cancellation Confirmation</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>About</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Settings</td>
+      <td>0.6</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Add to Playlist</td>
+      <td>2.3</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Add Friend</td>
+      <td>1.4</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>NextSong</td>
+      <td>81.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Thumbs Up</td>
+      <td>4.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Help</td>
+      <td>0.5</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Upgrade</td>
+      <td>0.2</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Error</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Submit Upgrade</td>
+      <td>0.1</td>
+      <td>Yes</td>
+    </tr>
     <tr>
       <th>0</th>
       <td>Submit Downgrade</td>
@@ -15045,7 +15070,7 @@ NEW COLUMN ==> Churn : 1 if the user churned, 0 otherwise
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
@@ -15423,6 +15448,64 @@ only showing top 20 rows
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Spotted-anomaly-in-the-dataset">Spotted anomaly in the dataset<a class="anchor-link" href="#Spotted-anomaly-in-the-dataset">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAJ0AAAAdCAYAAACwlm4OAAAH9klEQVR4Ae1beUiVSxT/XbXN0NQsLSXKrF6boRgYRT0yaJX2qIiW1yOhok1biAgpKAgqix601yMqWwh6QYtF/RP2T2FGJBVWVLaCkT5T07yP39G5jV93sdv3utfud+Q68805c2bmzO8758xctdntdjss8qkFamrqUF5e5dM5/MzBg37mYNZYlgVogRDLDL61AANNYXEp/q2sgc3WvLkwNjmTVe1Jvbo0T5GPpCzQ+cjwaljmNn/lFaC+vh4g6FSyo+pGICq+UvCNnA252RmK65elBTpfb4udOOOPBji9bgSZcb6K31jaGnUZsWrs5stnK6fzpfUDdGwLdAG68b5ctgU6X1o/QMe2QBegG+/LZfsV6Hh9oN9VG5/NMtT/pdes+f3qekwBHY/7X758afKRK4DvtN6qVauwe/du6fXp0yesXLkSd+/e9ahFH18HrauO1Dlp0qQmAHcl+yPtnAvn1pw5/cg4La2vKVcm8+fPx7179xAfHw9b463l4MGDsWjRIsTExDjalHG4CUpOtbF8//49OnToIE3crHfv3qG6uloXcVp/+vQppkyZgn79+uHYsWMICXG/LOosLS11qstTo6u5O+tH2Xnz5mHhwoUYMWKE0zU76/ert7nfnWaunsbt1q0b9u7dK2/148ePsXz5ctn8NWvWNAEBZdWHwHMGvmYO6xDbuXMn4uLi8OjRIxQWFiI1NbWJXo5HYmkcT/HI13nO2tmmPsa56/KqzpIvj/J2fA4KMiW4ONbeEiumgI4Lb9WqFbp27So2iI2NRc+ePfHs2TN8/vxZQEeDExD79u3DkydP0LZtW3n76SWjo6O9sh11Pn/+HNevX0dOTg7y8vJw4cIFpKSkIDg4WHQy7N+4cUPCdk1NDRITE0EvzL6k4uJiLFiwANu3b8ewYcOkjbyzZ8/iyJEjoo9AefjwIQ4cOID79+8LcDjG4sWLBezsxJestrYWAwcOxJUrV9C7d2/Rzflt2LABbdq0QUREBM6dO9cE3DLgd/5y9hXYVxU2+WLj67P/1UwDHTeKbzSprKwMb9++lQ1mqCOP3m/16tWYMGECli1bho8fP2LTpk2oqKjA+vXrZVO+1zzUe+3aNbRr1w4jR44UoB0+fFjGVi8AQ++WLVuQmZmJAQMG4MOHD9ixY4cjbPfp00fCckFBAYYOHSqAoN7Lly9j+vTpAjDluUePHo25c+fKOglw6t26dSvCw8NljUwxkpOTpT00NBR1dXVYt26dhH4CnbbQvams12ZHSFyJw3aebBAbFoP0Xr+7FPPnbyLUpE0D3Zs3b7Bt2zbxbLdu3RKDz5o1SzwgBztz5owAa86cOejUqZOMv3nzZmRnZ2PJkiXo3LmzmlOzy6qqKty8eRPTpk1DVFQUJk6cCIZaeqUuXRq+9D59+rR4HQUgAoreh2OT6BGZd9HTZWVlCchev34tOggYEr0eXygCjh6LRB7H5ctF0JGYj1KGXpzEPnwhGPrp+VxRUFgZYG94YV3JqPbw6Aik/BanHltkaRroWrduDYZVJukMIzxUMM/jm03j0+N07NhRwKEsRa/AUypDsDf08uVLyePocUgca9y4cTh+/LgjcScA+/bt6/AwlOHcFHjYLykpSeZ4+/ZtCb0HDx4UkBC49FYEKT3z0qVLHXoIXnpNhmxF3bt3dwBOtVnltxYwDXQEFD0GafLkyRg7diyOHj2KFStWyEYx5+PG6cR8i5v6TcjRhVzUCWSCi6F81KhRDh1sJyB4qGDoJLiMoGbuRTlF9FTM0Xbt2oXc3Fzk5+fLibN9+/YiR29I/p49exzjqL76wYBezSLPFjD1KEXw8MNQuXHjRkmoGXZJzJd4BULPww0n2A4dOoQePXqAm/u9xBB48eJFMIQzrKsPvR49LAHJcZjr3blzR3JHgpFAZ0gm8BQRVMOHD0dRURFOnjwpvDFjxshaCKq0tDQ8ePBADkBcH9tYMrxTnyuiDCMA81b1MriSDaR20zydbjQaOyMjA6dOncKJEyckb2NOxVMd86bx48fLyfbq1atYu3atIyfSdXiqE3BMzGfPni0HFl2ep+ZLly6BwCR4zp8/j5kzZ0qdp1WGeoJBEefLkys9Fb1zenq6Iyckb8aMGWDo5WGEIGb68OLFC9FPsKv8UenTS+Zy+/fvF9nIyEjJA6kzkCk4h3cNP0jcXJ4WhwwZ4tBEb8DknlcM9HLcUIZBepWSkhIBGq8cmIOpEPXq1SskJCTIaZKegUn6oEGDJBd0KAbES9IrUZb9jZtIT0dQ9O/fX5J4eqrKykrxtNTHwwxDLuejiOE/LCxMwMjLXP1gQ3ATbLzoZn5XXl4u/KlTpwrguSbOlTagfkWcF69omPfxmog5IPXoxL+k+6coX/1Fnc5yWo8KjURqfLJTXktptJnxjzkMWyTj5jtrV23NkVeyRr3s646n+Ho/JU+eIp3PNl3GyDPy+azLqL56mxpH8Yx9+Fxvr8eff2dJqeTdlYnRCchM+8OdiN/zTAmvzgzNlTtrd9amrGTkGZ+VnCvd7vjudKl+nmTc8b3lqbEDqTT1IBFIhrPW6r0FLNB5bzurp5cWsEDnpeFM7aYdZvVvTllXP2o8na/aWlppSk7X0hbtT/MliIJsDfd+PMl6ApW73NGf1uVuLqacXt0NYPE8W6C6uhYVFQ1/N9j4z4jSiQDUgajXPWv1XwnL0/nB3ujey+jp9Ge97gfT9noK/wE/iH7zSdnJOgAAAABJRU5ErkJggg==" alt="image.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is one weird thing specific to churned users : they have less pages consulted in total, but at the same time they have far more advertisements displayed than the rest of the users ! 
+This annoying behaviour of the app may explain a lot in fact why those users may be likely to churn.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;in proportion, the churn users see </span><span class="si">{}</span><span class="s2"> % more adverts than the non churn users !&quot;</span>\
+      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">concat_users</span><span class="p">[(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">Churned</span> <span class="o">==</span> <span class="s1">&#39;Yes&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">page</span> <span class="o">==</span> <span class="s1">&#39;Roll Advert&#39;</span><span class="p">)][</span><span class="s1">&#39;percent(userId)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>\
+                           <span class="o">-</span> <span class="n">concat_users</span><span class="p">[(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">Churned</span> <span class="o">==</span> <span class="s1">&#39;No&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">page</span> <span class="o">==</span> <span class="s1">&#39;Roll Advert&#39;</span><span class="p">)][</span><span class="s1">&#39;percent(userId)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>\
+                    <span class="o">/</span><span class="n">concat_users</span><span class="p">[(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">Churned</span> <span class="o">==</span> <span class="s1">&#39;No&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">concat_users</span><span class="o">.</span><span class="n">page</span> <span class="o">==</span> <span class="s1">&#39;Roll Advert&#39;</span><span class="p">)][</span><span class="s1">&#39;percent(userId)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>in proportion, the churn users see 69.0 % more adverts than the non churn users !
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -16895,6 +16978,13 @@ only showing top 20 rows
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Final-preprocessing-before-Machine-Learning-steps">Final preprocessing before Machine Learning steps<a class="anchor-link" href="#Final-preprocessing-before-Machine-Learning-steps">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[117]:</div>
@@ -16960,6 +17050,21 @@ dtype: int64</pre>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Putting-all-together-into-a-function-to-quickly-recreate-the-dataframe">Putting all together into a function to quickly recreate the dataframe<a class="anchor-link" href="#Putting-all-together-into-a-function-to-quickly-recreate-the-dataframe">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So we don't need to redo all the steps above (feature engineering, cleaning and preprocessing), let's create a function to redo all these steps</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -17252,7 +17357,15 @@ dtype: int64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Modeling">Modeling<a class="anchor-link" href="#Modeling">&#182;</a></h1><p>In this part, we will train and test several ML models to determine the one which is giving the highest F1 score. The reason why we will use the F1 score as a metric is that the churned users proportion is quite low in the big dataset (285k records), so drawing conclusion on accuracy alone on such a small group of rows won't give a fair measurement and could even lead us to wrong assessment.</p>
+<p>We are now ready to move to the next part : Machine Learning modelling &amp; prediction !</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Machine-Learning-Modeling-&amp;-prediction">Machine Learning Modeling &amp; prediction<a class="anchor-link" href="#Machine-Learning-Modeling-&amp;-prediction">&#182;</a></h1><p>In this part, we will train and test several ML models to determine the one which is giving the highest F1 score. The reason why we will use the F1 score as a metric is that the churned users proportion is quite low in the big dataset (285k records), so drawing conclusion on accuracy alone on such a small group of rows won't give a fair measurement and could even lead us to wrong assessment.</p>
 
 </div>
 </div>
@@ -17261,6 +17374,32 @@ dtype: int64</pre>
 1) GBTClassifier
 2) RandomForestClassifier
 3) DecisionTreeClassifier
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Metrics">Metrics<a class="anchor-link" href="#Metrics">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We are going to use the F1 score as the metrics to solve this classification problem (predicting churn), here is the reason why</p>
+<p>F1 score is a weighted average between precision on one hand, and recall on the other hand.</p>
+<p>By precision , we mean that we want to make sure that when we predict that a user will churn, it actually truly churn . This is important as we can use this metric to offer special retention condition to users we are pretty sure will leave the service otherwise. On the other hand, a good precision will also allow us to offer special condition to a user that would have stayed with the service regardless (this would not be a good option from the profitability standpoint)</p>
+<p>By recall , we mean that we want to truly detect as many of these churn users as possible to make sure we can jugulate the erosion of the overall subscriptions</p>
+<p>The F1 score is somehow providing the "best of both worlds", mixing these two important criteria</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modelling">Modelling<a class="anchor-link" href="#Modelling">&#182;</a></h2>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -17712,6 +17851,30 @@ predictions for model DecisionTree : f1 = 0.8188405797101449
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Improvements">Improvements<a class="anchor-link" href="#Improvements">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As always, "all models are wrong and some are usefull". So there are certainly room for improvement here as well.</p>
+<p>Here are few potential improvement areas</p>
+<ul>
+<li><p>I could have played more with the hyperparameters tuning using gridsearch : deepth of the trees, or changing the loss function maybe.</p>
+</li>
+<li><p>What would certainly help better is simply to download more data from the main dataset to give the chance to the algorithm to better learn.</p>
+</li>
+<li><p>Last but not least we could have added more features like geographical data for instance (as we have the location column in the dataset)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h1>
 </div>
 </div>
@@ -17733,22 +17896,6 @@ predictions for model DecisionTree : f1 = 0.8188405797101449
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This was my first exposure to the spark ml framework and it took me quite a bit of time to adapt and to learn how to use it. Once I was familiar, I could make the connection with pandas and sklearn, as at the end these frameworks are similar. I was though a bit disappointed by the documentation available for spark which seems to be less described compared to pandas and sklearn, maybe because of the popularity of these last two.
 It was interesting as well to understand how the processing of "big data" works in the background, with the full capabilities of the Spark framework. It actually gave me the idea to start experimenting more in Azure databricks (which is available in my company) on some other real work examples and "big data" accessible from azure datalake (ex: prediction of sales)</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Improvements">Improvements<a class="anchor-link" href="#Improvements">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As always, "all models are wrong and some are usefull". So there are certainly room for improvement here as well.
-I could have played more with the hyperparameters tuning using gridsearch, probably playing with the deepth of the trees, or changing the loss function maybe. What would certainly help better is simply to download more data from the main dataset to give the chance to the algorithm to better learn. Last but not least we could have added more features like geographical data for instance (as we have the location column in the dataset)</p>
 
 </div>
 </div>
