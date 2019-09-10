@@ -20,8 +20,11 @@ This project requires the following python libraries
 
 
 ### Result
-Results are described in the jupyter notebook attached to this repo
 
+In a nutshell, the elapsed time since the user joined is apparently playing a critical role in its decision to churn.
+The machine learning model is also confirming our assumptions for churn, i.e. that user churn is mainly influenced by the amount of 'Thumbs down' and the amount of advertisement proposed to the user during its usage of the app.
+
+Detailed results are described in the jupyter notebook attached to this repo
 
 ### Licensing, Authors, Acknowledgements
 All credits go to Udacity for setting up this study
