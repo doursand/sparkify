@@ -7,6 +7,9 @@ In this project one needs to analyse a tiny subset representation of a much larg
 The small dataset version contains only 2 months of logs
 The ultimate goal is to identify which parameters are the most likely to conduct the users to churn / leave the service
 
+### Medium publication link
+https://medium.com/@andre.dourson/predict-churn-for-sparkify-app-playing-with-spark-ml-511df6c3eb35
+
 ### Requirements
 This project requires the following python libraries
 
@@ -17,7 +20,10 @@ This project requires the following python libraries
 - jupyter notebook
 
 ### Files Description
-
+- Sparkify.html	: html version of the jupyter notebook
+- Sparkify.ipynb	: jupyter notebook
+- dt_bestmodel.model	: export of the trained decision tree model
+- mini_sparkify_event_data.json : sparkify dataset
 
 ### Result
 
