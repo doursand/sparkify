@@ -1,5 +1,5 @@
 # sparkify
-user spark and machine learning to predict users churn
+using spark and machine learning to predict users churn
 
 ### Summary
 This is the Capstone project for the Udacity Data Scientist nanodegree
@@ -17,12 +17,11 @@ This project requires the following python libraries
 - jupyter notebook
 
 ### Files Description
-Sprakify .ipynb Main file of the project, it demonstrates the process of using pyspark to explore the data and build the model.
-
-###Result
 
 
+### Result
+Results are described in the jupyter notebook attached to this repo
 
 
-Licensing, Authors, Acknowledgements
-Must give credit to Udacity for the project. You can't use this for you Udacity capstone project. Otherwise, feel free to use the code here as you would like!
+### Licensing, Authors, Acknowledgements
+All credits go to Udacity for setting up this study
